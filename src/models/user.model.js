@@ -19,7 +19,7 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
-    fullname: {
+    fullName: {
       type: String,
       required: true,
       unique: true,
@@ -54,14 +54,14 @@ const userSchema = new Schema(
 
 // to encrypt the passowrd when we change the passowrd
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("passowrd")) return next();
+  if (!this.isModified("password")) return next();
 
   this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
-  return await bcrypt.compare(password, this.passowrd);
+  return await bcrypt.compare(password, this.password);
 };
 
 userSchema.methods.generateAccessToken = function () {
