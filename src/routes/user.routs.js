@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loginUser, logoutUser, registerUser } from "../controllers/user.contorller.js";
+import { registerUser,loginUser,logoutUser } from "../controllers/user.contorller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -21,6 +21,6 @@ router.route("/register").post(
 
 router.route("/login").post(loginUser)
 
-// recured routs
+// // recured routs
 router.route("/logout").post(verifyJWT,logoutUser)
 export default router
